@@ -4,10 +4,10 @@ import { Quiz } from '../../models/Quiz';
 import { relogRequestHandler } from '../../middleware/request-middleware';
 
 export const updateQuizSchema = Joi.object().keys({
+  _id: Joi.string().required(),
   name: Joi.string(),
   description: Joi.string(),
   questions: Joi.array().items({
-    _id: Joi.string().required(),
     question: Joi.string(),
     options: Joi.object().keys({
       a: Joi.string(),

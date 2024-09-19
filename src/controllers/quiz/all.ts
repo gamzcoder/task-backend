@@ -70,4 +70,4 @@ const getQuizzWapper: RequestHandler = async (req, res) => {
 
 export const getQuiz = relogRequestHandler(getQuizzWapper);
 
-export const all = relogRequestHandler(getQuizzesWapper, { validation: { query: querySchema } });
+export const all = relogRequestHandler(getQuizzesWapper, { validation: { query: querySchema }, requiredRoles: ['superAdmin', 'admin'] });

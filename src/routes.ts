@@ -18,9 +18,10 @@ router.post('/register', AuthController.register);
 router.get('/user/all', UserController.all);
 
 router.post('/admin/quiz', AdminController.add);
-router.get('/admin/quiz', checkRole(['superAdmin']), AdminController.all);
-router.get('/admin/quiz-details', checkRole(['superAdmin']), AdminController.getQuiz);
-router.put('/admin/quiz', checkRole(['superAdmin']), AdminController.update);
+router.get('/admin/quiz', AdminController.all);
+router.get('/admin/quiz-details', AdminController.getQuiz);
+router.put('/admin/quiz', AdminController.update);
+router.delete('/admin/quiz',AdminController.delete)
 
 router.post('/quiz/start', ResponseController.startQuiz);
 router.post('/quiz/submit', ResponseController.submitQuiz);
