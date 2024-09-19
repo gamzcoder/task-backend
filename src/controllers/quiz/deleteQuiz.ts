@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import mongoose from 'mongoose';
 import { Quiz } from '../../models/Quiz';
+import { relogRequestHandler } from '../../middleware/request-middleware';
 
 interface QueryParams {
     id?:string
@@ -29,5 +30,4 @@ const deleteQuizWapper: RequestHandler = async (req, res) => {
     return res.status(500).json({ message: 'Internal server error', error: error.message });
   }
 };
-
-export default deleteQuizWapper;
+export const deleteQuiz = relogRequestHandler(deleteQuizWapper, { requiredRoles: ['superAdmin', 'admin'] });

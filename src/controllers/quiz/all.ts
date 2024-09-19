@@ -68,6 +68,21 @@ const getQuizzWapper: RequestHandler = async (req, res) => {
   }
 };
 
+const randomQuizWapper: RequestHandler = async (req, res) => {
+  try {
+    const quiz = await Quiz.aggregate([{ $sample: { size: 1 } }]);
+
+    if (!quiz) {
+      return res.status(404).json({ message: 'Quiz not found' });
+    }
+    return res.status(200).json(quiz);
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+};
+
 export const getQuiz = relogRequestHandler(getQuizzWapper);
+
+export const randomQuiz = relogRequestHandler(randomQuizWapper);
 
 export const all = relogRequestHandler(getQuizzesWapper, { validation: { query: querySchema }, requiredRoles: ['superAdmin', 'admin'] });
